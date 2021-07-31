@@ -15,7 +15,11 @@ async function handleRequest(request) {
         }
     })
 
-    return new Response(JSON.stringify(await response.json()))
+    return new Response(JSON.stringify(await response.json()), {
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        }
+    })
 }
 
 async function getOauthToken() {

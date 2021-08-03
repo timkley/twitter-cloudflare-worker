@@ -3,7 +3,6 @@ addEventListener('fetch', event => {
 })
 
 /**
- * Respond with hello worker text
  * @param {Request} request
  */
 async function handleRequest(request) {

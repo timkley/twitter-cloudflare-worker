@@ -11,16 +11,16 @@ async function handleRequest(event) {
         return response
     }
 
-    const twitterResponse = await fetch(
+    const twitterResponse = await (await fetch(
         'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=timkley&count=1',
         {
             headers: {
                 Authorization: `Bearer ${oauthToken}`,
             },
         },
-    )
+    )).json()
 
-    response = new Response(JSON.stringify(await twitterResponse[0]), {
+    response = new Response(JSON.stringify(twitterResponse[0]), {
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Cache-Control': 'max-age: 43200',

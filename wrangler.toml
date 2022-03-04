@@ -1,6 +1,6 @@
 name = "last-tweet"
-account_id = "a16cbdebf4a8b8df213ad63bffd6e5a1"
 type = "javascript"
+account_id = "a16cbdebf4a8b8df213ad63bffd6e5a1"
 workers_dev = true
 
 [env.production]

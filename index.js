@@ -1,15 +1,17 @@
 addEventListener('fetch', event => {
-    event.respondWith(handleRequest(event.request))
+    event.respondWith(handleRequest(event))
 })
 
-/**
- * @param {Request} request
- */
-async function handleRequest(request) {
+async function handleRequest(event) {
     const cache = caches.default
     const oauthToken = await getOauthToken()
 
-    const response = await fetch(
+    let response = await cache.match(event.request)
+    if (response) {
+        return response
+    }
+
+    const tweet = await fetch(
         'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=timkley&count=1',
         {
             headers: {
@@ -18,11 +20,16 @@ async function handleRequest(request) {
         },
     )
 
-    return new Response(JSON.stringify(await response.json()), {
+    response = new Response(JSON.stringify(await tweet.json()), {
         headers: {
             'Access-Control-Allow-Origin': '*',
+            'Cache-Control': 'max-age: 43200',
         },
     })
+
+    event.waitUntil(cache.put(event.request, response.clone()))
+
+    return response
 }
 
 async function getOauthToken() {

@@ -13,4 +13,4 @@ wrangler secret put TWITTER_API_KEY --env production
 wrangler secret put TWITTER_API_SECRET --env production
 ```
 
-You can create an App and get those keys by visiting the [developer porta](https://developer.twitter.com/en/apps)
+You can create an App and get those keys by visiting the [developer portal](https://developer.twitter.com/en/apps)

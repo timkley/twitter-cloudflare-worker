@@ -23,7 +23,7 @@ async function handleRequest(event) {
     response = new Response(JSON.stringify(twitterResponse[0]), {
         headers: {
             'Access-Control-Allow-Origin': '*',
-            'Cache-Control': 'max-age: 43200',
+            'Cache-Control': 'max-age: 300',
         },
     })
 
